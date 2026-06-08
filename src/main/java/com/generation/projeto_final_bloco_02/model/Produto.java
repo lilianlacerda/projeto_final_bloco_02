@@ -3,13 +3,18 @@ package com.generation.projeto_final_bloco_02.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Produto {
 	
 	@Id
@@ -30,6 +35,10 @@ public class Produto {
 	private int quantidade;
 	
 	private LocalDate dataValidade;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -77,5 +86,13 @@ public class Produto {
 
 	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 }
